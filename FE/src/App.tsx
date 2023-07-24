@@ -1,23 +1,33 @@
-import Signin from "./components/user/login/Signin";
+
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
-import Signup from "./components/user/login/Signup";
-import Dashboard from "./components/admin/products/dashboard";
+
+import Dashboard from "./components/admin/products/dashboardProduct";
 import AddProduct from "./components/admin/products/addProduct";
 import EditProduct from "./components/admin/products/editProduct";
-import Product from "./components/user/product/Product";
-import PriceFilter from "./demo/priceFilter";
+
+
+import DashboardCategory from "./components/admin/categories/dashboardCategory";
+import EditCategory from "./components/admin/categories/editCategory";
+import AddCategory from "./components/admin/categories/addCategory";
+import HomePage from "./components/user/product/product";
+import ProductDetail from "./components/user/product/productDetail";
+import Header from "./layouts/user/search";
+
 const App = () => {
     return (
       <BrowserRouter>
         <Routes>
-            <Route path="/" element={<Signin/>}></Route>
-           
-            <Route path="/products" element={<Dashboard/>}></Route>
-            <Route path="/user/products" element={<Product/>}></Route>
-            <Route path="/edit/:id" element={<EditProduct/>}></Route>
-            <Route path="/add" element={<AddProduct/>}></Route>
-            <Route path="/filter" element={<PriceFilter/>}></Route>
-            
+            <Route path="/" element={<HomePage/>}></Route>
+            <Route path="/products/:id" element={<ProductDetail/>} />
+
+            <Route path="/admin/products" element={<Dashboard/>}></Route>
+            <Route path="/admin/products/edit/:id" element={<EditProduct/>}></Route>
+            <Route path="/admin/products/add" element={<AddProduct/>}></Route>
+      
+            <Route path="/admin/categories" element={<DashboardCategory/>}></Route>
+            <Route path="/admin/categories/edit/:id" element={<EditCategory/>}></Route>
+            <Route path="/admin/categories/add" element={<AddCategory/>}></Route>
+
         </Routes>
       </BrowserRouter>
     );

@@ -1,6 +1,6 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import productRouter from './routers/devices'
+import categoryRouter from './routers/categories'
 import bodyParser from 'body-parser'
 import fileRouter from "./routers/file"
 import { fileURLToPath } from 'url';
@@ -28,7 +28,7 @@ app.use('/upload', fileRouter)
 mongoose.connect("mongodb://127.0.0.1/assignment1")
     .then(() => console.log("Connect to DB successfully"))
 // Router
-app.use('/', productRouter)
+app.use('/', categoryRouter)
 app.listen(port, function () {
     console.log(`Server is running on port ${port}`);
 }) 

@@ -1,23 +1,22 @@
-import { create, edit, getAll, getById, remove } from "../api/products"
+import { createProduct, editProduct, getAllProduct, getProductById, removeProduct } from "../api/products"
 
 export const getProduct = () => async (dispatch: any) => {
     try {
-        const { data } = await getAll()
+        const { data } = await getAllProduct()
         dispatch({ type: "admin/fetch_product", payload: data })
-
-    } catch (error) { 
+    } catch (error) {
     }
 }
 export const getProductByID = (id: any) => async (dispatch: any) => {
     try {
-        const { data } = await getById(id)
+        const { data } = await getProductById(id)
         dispatch({type: "admin/fetch_productByid" , payload : data})        
     } catch (error) { }
 }
 
-export const removeProduct = (id: any) => async (dispatch: any) => {
+export const removeProductAction = (id: any) => async (dispatch: any) => {
     try {
-        await remove(id)
+        await removeProduct(id)
         dispatch({ type: "admin/delete_product", payload: id })
     } catch (error) {
 
@@ -25,14 +24,14 @@ export const removeProduct = (id: any) => async (dispatch: any) => {
 }
 export const addProductApi = (d: any) => async (dispatch: any) => {
     try {
-        const product = await create(d)
+        const product = await createProduct(d)
         dispatch({ type: "admin/add_product", payload: product })
     } catch (error) { }
 }
 
-export const editProductApi = (d: any, id: any) => async (dispatch: any) => {
+export const editProductApi = (id: any, d: any) => async (dispatch: any) => {
     try {
-        const { data } = await edit(id, d);
+        const { data } = await editProduct(id, d);
         dispatch({ type: "admin/update_product", payload: data })
     } catch (error) { }
 }

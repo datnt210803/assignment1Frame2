@@ -3,19 +3,19 @@ import axios from "axios";
 const instance = axios.create({
     baseURL: "http://localhost:3000/categories",
 })
-export const getAll=()=>{
+export const getAllCategory=()=>{
     return instance.get("")
 }
-export const getById=(id:any)=>{
+export const getCategoryById=(id:any)=>{
     return instance.get(`/${id}`)
 }
-export const create=(data:any)=>{
-    return instance.post("",data) 
+export const createCategory=(data:any)=>{
+    return instance.post("",data)
 }
-export const remove=(id:any)=>{
+export const removeCategory=(id:any)=>{
     return instance.delete(`/${id}`)
 }
-export const edit=(id:any,data:any)=>{
+export const editCategory=(id:any,data:any)=>{
     return instance.put(`/${id}`,data)
 }
 

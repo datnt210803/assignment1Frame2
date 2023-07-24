@@ -1,5 +1,6 @@
+import { categoryReducer } from '../reducers/categoryReducer';
 import { productReducer } from '../reducers/productsReducer';
-import { userReducer } from '../reducers/userReducer';
+
 import { legacy_createStore as createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk'
 
@@ -15,8 +16,9 @@ const enhancer = composeEnhancers(
     // other store enhancers if any 
 );
 const rootReducer = combineReducers({
-    user: userReducer,
-    products: productReducer
+   
+    products: productReducer,
+    categories:categoryReducer
 })
 const store = createStore(rootReducer, enhancer);
 export default store 
