@@ -16,7 +16,8 @@ const HomePage = () => {
     const [selectedCateValue, setSelectedCateValue] = useState('');
     const [selectedPriceValue, setSelectedPriceValue] = useState('');
     const [displayedProducts, setDisplayedProducts] = useState(products);
-
+    console.log(products);
+    
     const handleCateSelectChange = (event: any) => {
         const selectedCateOptionValue = event.target.value;
         setSelectedCateValue(selectedCateOptionValue);
@@ -102,6 +103,8 @@ const HomePage = () => {
                 filterProduct = products
             } else {
                 filterProduct = products.filter((product: any) => product.category === selectedCateValue);
+                console.log(filterProduct);
+                
             }
 
         } else if (selectedPriceValue) {
@@ -129,7 +132,7 @@ const HomePage = () => {
         setDisplayedProducts(filterProduct);
     }, [products, selectedCateValue, selectedPriceValue]);
 
-    console.log(displayedProducts);
+    console.log();
 
     return <div className='relative'>
         <Header/>
@@ -184,7 +187,7 @@ const HomePage = () => {
                             <select value={selectedCateValue} onChange={handleCateSelectChange} className="mt-1 rounded border-gray-300 text-sm">
                                 <option value={0}>Category</option>
                                 {categories.map((category: any) => {
-                                    return <option key={category?.id} value={category?.id}>{category?.name}</option>
+                                    return <option key={category?.id} value={category?._id}>{category?.name}</option>
 
                                 })}
                             </select>
@@ -248,7 +251,7 @@ const HomePage = () => {
                         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                             {displayedProducts.map((product: any) => {
                                 return <li>
-                                    <Link to={`/products/${product?.id}`} className="group block overflow-hidden">
+                                    <Link to={`/products/${product?._id}`} className="group block overflow-hidden">
                                         <img
                                             src={product?.image}
                                             alt=""

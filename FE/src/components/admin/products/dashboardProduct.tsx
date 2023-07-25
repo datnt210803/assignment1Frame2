@@ -1,14 +1,15 @@
-import { getProduct, removeProductAction } from '../../../actions/product'
+import { getProduct } from '../../../actions/product'
 import { removeProduct } from '../../../api/products'
 import { useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Dispatch } from 'redux'
-
+import { useNavigate } from 'react-router-dom'
 import { getCategory } from '../../../actions/category'
 import AdminHeader from '../../../layouts/admin/header'
 const Dashboard = () => {
     const dispatch: Dispatch<any> = useDispatch()
+    const url=useNavigate()
     const { products } = useSelector((state: any) => state.products);
     const { categories } = useSelector((state: any) => state.categories);
 
@@ -19,9 +20,10 @@ const Dashboard = () => {
     }, [])
 
 
-    const removeProductCo = async (id: any) => {
-        await removeProduct(id)
-        dispatch({ type: "admin/delete_product", payload: id })
+    const removeProductCo = async (id: string) => {
+        await removeProduct(String(id))
+        dispatch({ type: "admin/delete_product", payload:id })
+        
     }
     return (<div>
         <AdminHeader />
@@ -52,13 +54,13 @@ const Dashboard = () => {
                 </thead>
                 <tbody className="divide-y divide-gray-200 text-center">
                     {products?.map((product: any) => {
-                        const cateId = product?.category
+                        const cateId = product?._category
 
 
-                        const category = categories.find((cate: any) => cate.id === cateId)
+                        const category = categories.find((cate: any) => cate._id === cateId)
 
 
-                        return <tr key={product.id}>
+                        return <tr key={product._id}>
                             <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                                 {product?.name}
                             </td>
@@ -77,8 +79,8 @@ const Dashboard = () => {
                                 {category?.name}
                             </td>
                             <td> <div className=''>
-                                <Link to={`/admin/products/edit/${product.id}`}><button className='bg-green-500 text-white p-[10px]'>Edit</button></Link>
-                                <button className='bg-red-500 text-white p-[10px]' onClick={() => removeProductCo(product.id)}>Delete</button>
+                                <Link to={`/admin/products/edit/${product._id}`}><button className='bg-green-500 text-white p-[10px]'>Edit</button></Link>
+                                <button className='bg-red-500 text-white p-[10px]' onClick={() => removeProductCo(product._id)}>Delete</button>
                             </div></td>
                         </tr>
 

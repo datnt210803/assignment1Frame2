@@ -4,14 +4,14 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import Dashboard from "./components/admin/products/dashboardProduct";
 import AddProduct from "./components/admin/products/addProduct";
 import EditProduct from "./components/admin/products/editProduct";
-
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import DashboardCategory from "./components/admin/categories/dashboardCategory";
 import EditCategory from "./components/admin/categories/editCategory";
 import AddCategory from "./components/admin/categories/addCategory";
 import HomePage from "./components/user/product/product";
 import ProductDetail from "./components/user/product/productDetail";
-import Header from "./layouts/user/search";
+
 
 const App = () => {
     return (

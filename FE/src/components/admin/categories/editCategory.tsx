@@ -8,7 +8,7 @@ import AdminHeader from '../../../layouts/admin/header';
 
 
 const EditCategory = () => {
-    const { id }: any = useParams()
+    const { id } = useParams()
     const dispatch: Dispatch<any> = useDispatch();
     //lấy dữ liệu từ reducer
     const { category } = useSelector((state: any) => state.categories)
@@ -19,11 +19,11 @@ const EditCategory = () => {
     const { register, handleSubmit } = useForm();
 
     useEffect(() => {
-        dispatch(getCategoryByID(id));
+        dispatch(getCategoryByID(String(id)));
     }, [])
 
     const onHandleSubmit = (d: any) => {
-        dispatch(editCategoryApi(id, d))
+        dispatch(editCategoryApi(String(id), d))
         url("/admin/categories")
     }
     return <div>

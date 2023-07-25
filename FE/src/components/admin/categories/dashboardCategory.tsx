@@ -16,7 +16,7 @@ const DashboardCategory = () => {
         dispatch(getCategory());
     }, [])
 
-    const removeCategoryId = async (id: any) => {
+    const removeCategoryId = async (id: string) => {
         await removeCategory(id)
         dispatch({ type: "admin/delete_category", payload: id })
     }
@@ -38,14 +38,14 @@ const DashboardCategory = () => {
                 </thead>
                 <tbody className="divide-y divide-gray-200 text-center">
                     {categories.map((category: any) => {
-                        return <tr key={category.id}>
+                        return <tr key={category._id}>
                             <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                                 {category?.name}
                             </td>
 
                             <td> <div className=''>
-                                <Link to={`/admin/categories/edit/${category.id}`}><button className='bg-green-500 text-white p-[10px]'>Edit</button></Link>
-                                <button className='bg-red-500 text-white p-[10px]' onClick={() => removeCategoryId(category.id)}>Delete</button>
+                                <Link to={`/admin/categories/edit/${category._id}`}><button className='bg-green-500 text-white p-[10px]'>Edit</button></Link>
+                                <button className='bg-red-500 text-white p-[10px]' onClick={() => removeCategoryId(category._id)}>Delete</button>
                             </div></td>
                         </tr>
 

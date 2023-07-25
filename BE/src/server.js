@@ -6,7 +6,7 @@ import fileRouter from "./routers/file"
 import { fileURLToPath } from 'url';
 import path from 'path'
 import cors from "cors"
-
+import productRouter from "./routers/products"
 export const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
 const app = express()
@@ -29,6 +29,7 @@ mongoose.connect("mongodb://127.0.0.1/assignment1")
     .then(() => console.log("Connect to DB successfully"))
 // Router
 app.use('/', categoryRouter)
+app.use("/",productRouter)
 app.listen(port, function () {
     console.log(`Server is running on port ${port}`);
 }) 

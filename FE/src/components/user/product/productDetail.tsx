@@ -15,7 +15,7 @@ const ProductDetail = () => {
     const url = useNavigate()
 
     useEffect(() => {
-        dispatch(getProductByID(id));
+        dispatch(getProductByID(String(id)));
     }, [])
 
     return <div>

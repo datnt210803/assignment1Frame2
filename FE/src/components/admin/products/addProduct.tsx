@@ -27,6 +27,8 @@ const AddProduct = () => {
             ...d,
             category: selectedCategory,
         };
+        console.log("productData: ",productData);
+        
         dispatch(addProductApi(productData))
         url("/admin/products")
     }
@@ -86,7 +88,7 @@ const AddProduct = () => {
                                     onChange={(e) => setSelectedCategory(e.target.value)}
                                 >
                                     {categories.map((category: any) => {
-                                        return <option key={category?.id} value={category?.id}>{category?.name}</option>
+                                        return <option key={category?._id} value={category?._id}>{category?.name}</option>
                                     })}
                                 </select>
                             </div>

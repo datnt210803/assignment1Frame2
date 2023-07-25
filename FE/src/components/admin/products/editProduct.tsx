@@ -9,7 +9,7 @@ import AdminHeader from '../../../layouts/admin/header';
 
 const EditProduct = () => {
 
-    const { id } = useParams()
+    const { id } = useParams<string>()
     const dispatch: Dispatch<any> = useDispatch();
     //lấy dữ liệu từ reducer
     const { product } = useSelector((state: any) => state.products)
@@ -20,7 +20,7 @@ const EditProduct = () => {
     const { register, handleSubmit, setValue } = useForm();
 
     useEffect(() => {
-        dispatch(getProductByID(id));
+        dispatch(getProductByID(String(id)));
         dispatch(getCategory());
     }, [])
 
@@ -29,7 +29,7 @@ const EditProduct = () => {
             ...d,
             category: selectedCategory,
         };
-        dispatch(editProductApi(id, productData))
+        dispatch(editProductApi(String(id), productData))
         url("/admin/products")
     }
     return (
@@ -93,7 +93,7 @@ const EditProduct = () => {
                                         onChange={(e) => setSelectedCategory(e.target.value)}
                                     >
                                         {categories.map((category: any) => {
-                                            return <option key={category?.id} value={category?.id}>{category?.name}</option>
+                                            return <option key={category?._id} value={category?._id}>{category?.name}</option>
                                         })}
                                     </select>
                                 </div>

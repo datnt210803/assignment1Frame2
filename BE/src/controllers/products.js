@@ -1,40 +1,20 @@
-import Device from "../models/devices"
+import Product from "../models/products"
 import Joi from "joi"
-import fuzzy from "fuzzysearch"
-import url from "url"
-import querystring from "querystring"
 
-const deviceSchema = Joi.object({
-    name: Joi.string().required().messages({
-        "string.empty": "{#label} Trường dữ liệu bắt buộc"
-    }),
+
+const productSchema = Joi.object({
+    name: Joi.string().required(),
     price: Joi.number().required(),
-    original_price: Joi.number().required().messages({
-        "number.empty": "{#label} Trường dữ liệu bắt buộc"
-    }),
-    
-    description: Joi.string().required().messages({
-        "string.empty": "{#label} Trường dữ liệu bắt buộc"
-    }),
-    
+    desc: Joi.string().required(),
+    category: Joi.string().required(),
+    image: Joi.string().required()
     
 })
 
 export const get = async (req, res) => {
     try {
-        const {name,description} = req.query;
-        const queryObject = {}
-        if(name){
-            queryObject.name = {$regex:name,$options:"i"}
-        }
-        if(description){
-            queryObject.description={$regex:description,$options:"i"}
-        }
-        const data = await Device.find(queryObject)
-        res.send({
-            message: "Get products successfully",
-            data: data
-        })
+        const data = await Product.find()
+        res.send(data)
     } catch (err) {
         res.status(500).send({
             message: err
@@ -45,11 +25,8 @@ export const get = async (req, res) => {
 export const getById = async (req, res) => {
     try {
         const id = req.params.id
-        const data = await Device.findById(id)
-        res.send({
-            message: "Get products successfully",
-            data: data
-        })
+        const data = await Product.findById(id)
+        res.send(data)
     } catch (err) {
         res.status(500).send({
             message: err
@@ -60,17 +37,14 @@ export const getById = async (req, res) => {
 export const create = async (req, res) => {
     try {
         const body = req.body
-        const { error } = deviceSchema.validate(body)
+        const { error } = productSchema.validate(body)
         if (error) {
             res.status(400).send({
                 message: error.message,
             })
         } else {
-            const data = await Device.create(body)
-            res.send({
-                message: "Create successfully",
-                data: data
-            })
+            const data = await Product.create(body)
+            res.send(data)
         }
 
     } catch (err) {
@@ -84,18 +58,15 @@ export const update = async (req, res) => {
     try {
         const id = req.params.id
         const body = req.body
-        const { error } = deviceSchema.validate(body)
+        const { error } = productSchema.validate(body)
         if (error) {
             res.status(400).send({
                 message: error.message,
             })
         } else {
-            const data = await Device.findByIdAndUpdate(id, body)
+            const data = await Product.findByIdAndUpdate(id, body)
             if (data) {
-                res.send({
-                    message: "Update successfully",
-                    data: data
-                })
+                res.send(data)
             } else {
                 res.status(400).send({
                     message: "Product is not existed"
@@ -112,12 +83,9 @@ export const update = async (req, res) => {
 export const remove = async (req, res) => {
     try {
         const id = req.params.id
-        const data = await Device.findByIdAndRemove(id)
+        const data = await Product.findByIdAndRemove(id)
         if (data) {
-            res.send({
-                message: "Delete successfully",
-                data: data
-            })
+            res.send(data)
         } else {
             res.status(400).send({
                 message: "Product is not existed"
@@ -132,22 +100,5 @@ export const remove = async (req, res) => {
 }
 
 
-export const search=async(req,res)=>{
-    try {
-        const query=url.parse(req.url).query
-        const param=querystring.parse(query)
-        const data=await Device.find()
-        const result =data.filter(item=>{
-            return fuzzy(param,data.name)
-        })
-        res.send({
-            message: "Get products successfully",
-            data: result
-        })
-    } catch (err) {
-        res.status(500).send({
-            message: err
-        })
-    }
-}
+
  
