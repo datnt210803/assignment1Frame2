@@ -19,6 +19,7 @@ const DashboardCategory = () => {
     const removeCategoryId = async (id: string) => {
         await removeCategory(id)
         dispatch({ type: "admin/delete_category", payload: id })
+        dispatch(getCategory())
     }
     return <div>
         <AdminHeader />

@@ -17,7 +17,7 @@ export const getProductByID = (id: string) => async (dispatch: any) => {
 
 export const removeProductAction = (id: string) => async (dispatch: any) => {
     try {
-        await removeProduct(id)
+        await removeProduct(String(id))
         dispatch({ type: "admin/delete_product", payload: id })
     } catch (error) {
 

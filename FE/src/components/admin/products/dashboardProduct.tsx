@@ -21,9 +21,11 @@ const Dashboard = () => {
 
 
     const removeProductCo = async (id: string) => {
+        console.log(id);
+        
         await removeProduct(String(id))
         dispatch({ type: "admin/delete_product", payload:id })
-        
+        dispatch(getProduct());
     }
     return (<div>
         <AdminHeader />
