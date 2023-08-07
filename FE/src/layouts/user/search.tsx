@@ -69,7 +69,7 @@ const Search = () => {
 
         <ul>
             {filteredProducts.map((product: any) =>
-                <li className="hover:cursor-pointer"> <Link to={`/products/${product?._id}`}>{product?.name}</Link></li>
+                <li className="hover:cursor-pointer"> <Link to={`/details/${product?.slug}`}>{product?.name}</Link></li>
             )}
 
         </ul>

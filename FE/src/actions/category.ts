@@ -25,8 +25,8 @@ export const removeCategoryAction = (id: string) => async (dispatch: any) => {
 }
 export const addCategoryApi = (d: ICategory) => async (dispatch: any) => {
     try {
-        const product = await createCategory(d)
-        dispatch({ type: "admin/add_category", payload: product })
+        const category = await createCategory(d)
+        dispatch({ type: "admin/add_category", payload: category })
     } catch (error) { }
 }
 

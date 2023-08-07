@@ -1,9 +1,10 @@
-import { addCategoryApi } from '../../../actions/category';
+import { addCategoryApi, getCategory } from '../../../actions/category';
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Dispatch } from 'redux';
 import AdminHeader from '../../../layouts/admin/header';
+import { useEffect } from 'react';
 const AddCategory = () => {
     const dispatch: Dispatch<any> = useDispatch();
     //lấy dữ liệu từ reducer
@@ -11,10 +12,11 @@ const AddCategory = () => {
     //tạo 1 biến navigate 
     const url = useNavigate()
     const { register, handleSubmit } = useForm();
-
+    
     const onHandleSubmit = (d: any) => {
         dispatch(addCategoryApi(d))
         url("/admin/categories")
+        dispatch(getCategory())
     }
     return <div>
         <AdminHeader />

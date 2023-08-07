@@ -11,6 +11,8 @@ import EditCategory from "./components/admin/categories/editCategory";
 import AddCategory from "./components/admin/categories/addCategory";
 import HomePage from "./components/user/product/product";
 import ProductDetail from "./components/user/product/productDetail";
+import SignIn from './components/signIn';
+import SignUp from './components/signUp';
 
 
 const App = () => {
@@ -19,15 +21,14 @@ const App = () => {
         <Routes>
             <Route path="/" element={<HomePage/>}></Route>
             <Route path="/products/:id" element={<ProductDetail/>} />
-
+            <Route path="/signIn" element={<SignIn/>} />
+            <Route path="/signUp" element={<SignUp/>} />
             <Route path="/admin/products" element={<Dashboard/>}></Route>
             <Route path="/admin/products/edit/:id" element={<EditProduct/>}></Route>
             <Route path="/admin/products/add" element={<AddProduct/>}></Route>
-      
             <Route path="/admin/categories" element={<DashboardCategory/>}></Route>
             <Route path="/admin/categories/edit/:id" element={<EditCategory/>}></Route>
             <Route path="/admin/categories/add" element={<AddCategory/>}></Route>
-
         </Routes>
       </BrowserRouter>
     );

@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from "react"
-import { editCategoryApi, getCategoryByID } from '../../../actions/category';
+import { editCategoryApi, getCategory, getCategoryByID } from '../../../actions/category';
 import { Dispatch } from 'redux';
 import AdminHeader from '../../../layouts/admin/header';
 
@@ -25,6 +25,7 @@ const EditCategory = () => {
     const onHandleSubmit = (d: any) => {
         dispatch(editCategoryApi(String(id), d))
         url("/admin/categories")
+
     }
     return <div>
         <AdminHeader />
