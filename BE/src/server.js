@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import categoryRouter from './routers/categories'
+import userRouter from "./routers/user"
 import bodyParser from 'body-parser'
 import fileRouter from "./routers/file"
 import { fileURLToPath } from 'url';
@@ -30,6 +31,8 @@ mongoose.connect("mongodb://127.0.0.1/assignment1")
 // Router
 app.use('/', categoryRouter)
 app.use("/",productRouter)
+app.use("/",userRouter)
+
 app.listen(port, function () {
     console.log(`Server is running on port ${port}`);
 }) 
